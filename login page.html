@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .error {
+            color: red;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username or Email:</label>
+                <input type="text" id="username" name="username" required>
+                <div class="error" id="usernameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <div class="error" id="passwordError"></div>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset error messages
+            document.querySelectorAll('.error').forEach(error => error.textContent = '');
+            
+            // Get form values
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            
+            // Validate username/email
+            if (username.length < 3) {
+                document.getElementById('usernameError').textContent = 'Username must be at least 3 characters long';
+                return;
+            }
+            
+            // Validate password
+            if (password.length < 8) {
+                document.getElementById('passwordError').textContent = 'Password must be at least 8 characters long';
+                return;
+            }
+            
+            // If validation passes, proceed with login attempt
+            // In a real application, you would send this data to a server for authentication
+            console.log('Attempting login with:', { username, password });
+            
+            // Simulating server-side password hashing and verification
+            simulateServerSideAuth(username, password);
+        });
+
+        function simulateServerSideAuth(username, password) {
+            // This function simulates what would happen on the server
+            // In reality, this would be done server-side, not in JavaScript
+
+            // Simulate password hashing (DO NOT use this for actual password hashing!)
+            const hashedPassword = btoa(password); // This is NOT secure, just for demonstration
+
+            // In a real application, you would:
+            // 1. Send the username and password to the server securely (using HTTPS)
+            // 2. The server would hash the password and compare it with the stored hash
+            // 3. If successful, the server would return a success response, possibly with a token
+            // 4. If unsuccessful, the server would return an error response
+
+            // Simulating a successful login for demonstration
+            console.log('Server received:', { username, hashedPassword });
+            alert('Login successful! (This is a simulation)');
+        }
+    </script>
+</body>
+</html>
